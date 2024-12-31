@@ -68,15 +68,25 @@ const App = () => {
       <main className="main-content">
         <div className="control-panel">
           <div className="input-container">
-            <label htmlFor="numGames">Quantidade de Jogos (1 a 10):</label>
-            <input
-              type="number"
-              id="numGames"
-              min="1"
-              max="10"
-              value={numGames}
-              onChange={(e) => setNumGames(Math.min(10, Math.max(1, Number(e.target.value))))}
-            />
+            <div className="quantity-control">
+              <button 
+                className="quantity-button"
+                onClick={() => setNumGames(prev => Math.max(1, prev - 1))}
+                disabled={numGames <= 1}
+              >
+                -
+              </button>
+              <span className="quantity-display">
+                {numGames} {numGames === 1 ? 'Jogo' : 'Jogos'}
+              </span>
+              <button 
+                className="quantity-button"
+                onClick={() => setNumGames(prev => Math.min(10, prev + 1))}
+                disabled={numGames >= 10}
+              >
+                +
+              </button>
+            </div>
           </div>
           
           <div className="button-group">
